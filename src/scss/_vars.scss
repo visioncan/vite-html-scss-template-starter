@@ -1,0 +1,10 @@
+@use 'sass:color';
+
+$main-color: #f8f8f8;
+
+:root {
+	--main-color: $main-color;
+	--main-text-color: rgba(255, 255, 245, .86);
+}
+
+$background-color:  color.invert($main-color, 90%);
