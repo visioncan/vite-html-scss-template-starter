@@ -15,10 +15,12 @@ export default defineConfig({
   css: {
     devSourcemap: true // sourcemap
   },
+  base: '',
   build: {
     rollupOptions: {
       output: {
-        // assetFileNames: 'assets/[name][extname]' // 不帶版號
+        // assetFileNames: 'assets/[name][extname]', // 不帶版號
+        // chunkFileNames: 'assets/[name].js'
       },
       input: Object.fromEntries(
         glob
