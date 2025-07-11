@@ -13,14 +13,19 @@ export default defineConfig({
     }
   },
   css: {
-    devSourcemap: true // sourcemap
+    devSourcemap: true // 產生 sourcemap
   },
   base: '',
   build: {
     rollupOptions: {
       output: {
-        // assetFileNames: 'assets/[name][extname]', // 不帶版號
-        // chunkFileNames: 'assets/[name].js'
+        assetFileNames: ({ name }) => {
+          if (name === 'main.css') {
+            return 'assets/style.css'
+          }
+          return 'assets/[name][extname]'
+        },
+        chunkFileNames: 'assets/[name].js'
       },
       input: Object.fromEntries(
         glob
