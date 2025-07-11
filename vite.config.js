@@ -24,17 +24,22 @@ export default defineConfig({
             return 'assets/style.css'
           }
           return 'assets/[name][extname]'
-        },
-        chunkFileNames: 'assets/[name].js'
+        }
       },
-      input: Object.fromEntries(
-        glob
+      input: Object.fromEntries([
+        ...glob
           .sync(['./*.html', './pages/**/*.html'])
-          .map(file => [
+          .map((file) => [
+            path.relative(__dirname, file.slice(0, file.length - path.extname(file).length)),
+            fileURLToPath(new URL(file, import.meta.url))
+          ]),
+        ...glob
+          .sync('./src/js/**/*.js')
+          .map((file) => [
             path.relative(__dirname, file.slice(0, file.length - path.extname(file).length)),
             fileURLToPath(new URL(file, import.meta.url))
           ])
-      )
+      ])
     }
   }
 })
